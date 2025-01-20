@@ -1,0 +1,59 @@
+services:
+  # API Gateway
+  gateway:
+    build: 
+      context: ./gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - ORDER_SERVICE=http://localhost:3002
+      - USER_SERVICE=http://localhost:3001
+      - PRODUCT_SERVICE=http://product-service:3003
+    depends_on:
+      - user-service
+      - order-service
+      - product-service
+
+  # User Service
+  user-service:
+    build:
+      context: ./services/user-service
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/user-service
+    depends_on:
+      - mongo
+
+  # Order Service
+  order-service:
+    build:
+      context: ./services/order-service
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/order-service
+      - USER_SERVICE_URL=http://localhost:3001
+      - PRODUCT_SERVICE_URL=http://localhost:3003
+    depends_on:
+      - mongo
+
+  # Product Service
+  product-service:
+    build:
+      context: ./services/product-service
+    ports:
+      - "3003:3003"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/product-service
+      - USER_SERVICE_URL=http://localhost:3001
+      - ORDER_SERVICE_URL=http://localhost:3002
+    depends_on:
+      - mongo
+
+  # MongoDB
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"

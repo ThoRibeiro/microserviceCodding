@@ -9,7 +9,7 @@ export interface IOrder extends Document {
   createdAt: Date;
 }
 
-const OrderSchema: Schema = new Schema({
+const Order: Schema = new Schema({
   productId: { type: Number, required: true },
   userId: { type: Number, required: true },
   quantity: { type: Number, required: true },
@@ -18,4 +18,4 @@ const OrderSchema: Schema = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<IOrder>("Order", OrderSchema);
+export default mongoose.model<IOrder>("Order", Order);

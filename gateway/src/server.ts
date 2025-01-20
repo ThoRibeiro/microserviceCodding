@@ -8,8 +8,8 @@ const app = express();
 
 // Configuration des proxys vers les microservices
 app.use("/users", createProxyMiddleware({ target: "http://localhost:3001", changeOrigin: true }));
-app.use("/products", createProxyMiddleware({ target: "http://localhost:3002", changeOrigin: true }));
-app.use("/orders", createProxyMiddleware({ target: "http://localhost:3003", changeOrigin: true }));
+app.use("/orders", createProxyMiddleware({ target: "http://localhost:3002", changeOrigin: true }));
+app.use("/products", createProxyMiddleware({ target: "http://localhost:3003", changeOrigin: true }));
 
 // Point d'entrée de l'API Gateway
 app.get("/", (req, res) => {

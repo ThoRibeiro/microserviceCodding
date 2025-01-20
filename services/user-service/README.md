@@ -1,4 +1,4 @@
-# gateway
+# user-service
 
 To install dependencies:
 
