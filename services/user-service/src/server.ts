@@ -8,15 +8,15 @@ import userRoutes from "./routes/user";
 dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes pour les utilisateurs
 app.use("/users", userRoutes);
 
 // Connexion à MongoDB
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/user-service", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect(process.env.MONGO || "mongodb://mongodb:27017/user-service", {
   } as mongoose.ConnectOptions)
   .then(() => {
     console.log("Connected to MongoDB");

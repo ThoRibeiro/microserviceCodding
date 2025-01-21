@@ -8,6 +8,8 @@ import orderRoutes from "./routes/order";
 dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes principales
 app.use("/orders", orderRoutes);
@@ -15,8 +17,6 @@ app.use("/orders", orderRoutes);
 // Connexion à MongoDB
 mongoose
   .connect(process.env.MONGO_URI || "mongodb://localhost:27017/order-service", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   } as mongoose.ConnectOptions)
   .then(() => {
     console.log("Connected to MongoDB");

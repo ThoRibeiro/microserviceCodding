@@ -8,6 +8,8 @@ import productRoutes from "./routes/product";
 dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes pour les produits
 app.use("/products", productRoutes);
@@ -15,8 +17,6 @@ app.use("/products", productRoutes);
 // Connexion à MongoDB
 mongoose
   .connect(process.env.MONGO_URI || "mongodb://localhost:27017/product-service", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   } as mongoose.ConnectOptions)
   .then(() => {
     console.log("Connected to MongoDB");
