@@ -31,7 +31,7 @@ Votre mission est de migrer une API monolithique de paiement vers un **Payment S
 
 Le **Payment Service** devra communiquer avec l’**Order Service** pour valider que la commande existe avant de créer un paiement.
 
-✅ Pour vous aider dans cette démarche, nous avons initié une collection Postman que vous pouvez télécharger ici !
+✅ Pour vous aider dans cette démarche, nous avons initié une collection Postman que vous pouvez télécharger [ici](https://drive.google.com/file/d/1nQS8O8YO-NvQ-Q0vfl_AeiLvh-LMn8qo/view?usp=sharing) !
 
 🚨 Pour commencer le projet, vous devez forker le dépôt existant et le renommer sous la forme `evalFinale-NOM-Prénom`. Toute personne qui ne respecte pas les demandes sera **sanctionnée en points** !
 
@@ -108,13 +108,14 @@ Le **Payment Service** doit inclure les routes suivantes :
    - Exécutez `mkdir nom-du-service` pour créer un dossier dédié.
    - Accédez au dossier avec `cd nom-du-service`.
    - Initialisez un projet Bun avec `bun init` en définissant le point d'entrée à `src/server.ts`.
-4. Fournissez votre code avec :
+4. Ne pas oublier de configurer le `.env` à la raçine du projet. 
+5. Fournissez votre code avec :
    - Un dossier `src/` contenant `models/`, `routes/`, `controllers/` et `services/`.
    - Un fichier `server.ts` pour démarrer le microservice.
    - Une configuration **Dockerfile** pour conteneuriser votre service.
-5. Modifiez le fichier `docker-compose.yml` pour inclure votre service.
-6. Testez votre microservice en local via Docker et fournissez une capture d'écran ou une vidéo démontrant son bon fonctionnement.
-7. Vérification du bon fonctionnement des autres services (aucun effet de bord dû au développement)
+6. Modifiez le fichier `docker-compose.yml` pour inclure votre service.
+7. Testez votre microservice en local via Docker et fournissez une capture d'écran ou une vidéo démontrant son bon fonctionnement.
+8. Vérification du bon fonctionnement des autres services (aucun effet de bord dû au développement)
 
 ---
 

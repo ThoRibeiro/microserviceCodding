@@ -6,9 +6,9 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - ORDER_SERVICE=http://localhost:3002
-      - USER_SERVICE=http://localhost:3001
-      - PRODUCT_SERVICE=http://product-service:3003
+      - ORDER_SERVICE=${ORDER_SERVICE}
+      - USER_SERVICE=${USER_SERVICE}
+      - PRODUCT_SERVICE=${PRODUCT_SERVICE}
     depends_on:
       - user-service
       - order-service
@@ -21,7 +21,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/user-service
+      - MONGO_URI=${MONGO_URI}/user-service
     depends_on:
       - mongo
 
@@ -32,9 +32,9 @@ services:
     ports:
       - "3002:3002"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/order-service
-      - USER_SERVICE_URL=http://localhost:3001
-      - PRODUCT_SERVICE_URL=http://localhost:3003
+      - MONGO_URI=${MONGO_URI}/order-service
+      - USER_SERVICE_URL=${USER_SERVICE}
+      - PRODUCT_SERVICE_URL=${PRODUCT_SERVICE}
     depends_on:
       - mongo
 
@@ -45,15 +45,14 @@ services:
     ports:
       - "3003:3003"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/product-service
-      - USER_SERVICE_URL=http://localhost:3001
-      - ORDER_SERVICE_URL=http://localhost:3002
+      - MONGO_URI=${MONGO_URI}/product-service
+      - USER_SERVICE_URL=${USER_SERVICE}
+      - ORDER_SERVICE_URL=${ORDER_SERVICE}
     depends_on:
       - mongo
 
   # Payment Service
   
-
   # MongoDB
   mongo:
     image: mongo

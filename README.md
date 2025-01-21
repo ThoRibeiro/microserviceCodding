@@ -1,4 +1,4 @@
-# Microservices API démo mémoire
+# 🚀 Microservices API Démo Mémoire
 
 Bienvenue dans ce projet qui démontre le développement et la mise en œuvre d'une API basée sur une architecture de microservices. 
 
@@ -6,21 +6,21 @@ Ce projet utilise **Bun** comme gestionnaire de packages et comprend plusieurs s
 
 ---
 
-## Table des matières
+## 📚 Table des matières
 
-1. [Aperçu du projet](#aperçu-du-projet)
-2. [Structure des microservices](#structure-des-microservices)
-3. [Prérequis](#prérequis)
-4. [Installation et configuration](#installation-et-configuration)
-5. [Démarrage du projet](#démarrage-du-projet)
-6. [Utilisation des endpoints](#utilisation-des-endpoints)
-7. [Développement avec Bun](#développement-avec-bun)
-8. [Contributions](#contributions)
-9. [Licence](#licence)
+1. [🔍 Aperçu du projet](#-aperçu-du-projet)
+2. [🏗️ Structure des microservices](#-structure-des-microservices)
+3. [📋 Prérequis](#-prérequis)
+4. [⚙️ Installation et configuration](#️-installation-et-configuration)
+5. [▶️ Démarrage du projet](#️-démarrage-du-projet)
+6. [📡 Utilisation des endpoints](#-utilisation-des-endpoints)
+7. [🛠️ Développement avec Bun](#️-développement-avec-bun)
+8. [🤝 Contributions](#-contributions)
+9. [📄 Licence](#-licence)
 
 ---
 
-## Aperçu du projet
+## 🔍 Aperçu du projet
 
 Ce projet est conçu pour illustrer les concepts fondamentaux des microservices en utilisant une architecture modulaire. Il comprend :
 
@@ -34,7 +34,7 @@ Chaque service est autonome et communique via des appels HTTP.
 
 ---
 
-## Structure des microservices
+## 🏗️ Structure des microservices
 
 ```
 microserviceCodding/
@@ -69,12 +69,12 @@ microserviceCodding/
 │   │   │   ├── controllers/
 │   │   │   ├── services/
 │   │   │   └── routes/
-├──────────────────────────
+└──────────────────────────
 ```
 
 ---
 
-## Prérequis
+## 📋 Prérequis
 
 - [Node.js](https://nodejs.org) version 18 ou supérieure
 - [Bun](https://bun.sh) (gestionnaire de packages rapide)
@@ -83,7 +83,7 @@ microserviceCodding/
 
 ---
 
-## Installation et configuration
+## ⚙️ Installation et configuration
 
 ### 1. Installer Bun
 
@@ -131,14 +131,34 @@ MONGO_URI=mongodb://mongo:27017/order-service
 PORT=3002
 ```
 
+**`services/product-service/.env`**
+```
+MONGO_URI=mongodb://mongo:27017/product-service
+PORT=3003
+```
+
 **`services/payment-service/.env`**
 ```
-MONGO_URI=? 
-PORT=?
+MONGO_URI=mongodb://mongo:27017/payment-service
+PORT=3004
 ```
+
+### 4. Variables d'environnement dans Docker Compose
+
+Dans le fichier `docker-compose.yml`, utilisez les variables d'environnement pour une configuration dynamique.
+
+Créez un fichier `.env` à la racine du projet :
+
+```env
+ORDER_SERVICE_URL=http://order-service:3002
+USER_SERVICE_URL=http://user-service:3001
+PRODUCT_SERVICE_URL=http://product-service:3003
+MONGO_URI=mongodb://mongo:27017
+```
+
 ---
 
-## Démarrage du projet
+## ▶️ Démarrage du projet
 
 ### Avec Docker Compose
 
@@ -162,7 +182,7 @@ http://localhost:3000/
 
 ---
 
-## Utilisation des endpoints
+## 📡 Utilisation des endpoints
 
 ### Gateway
 - **GET** `/` : Point de test pour vérifier que la Gateway fonctionne.
@@ -189,11 +209,11 @@ http://localhost:3000/
 - **DELETE** `/products/:id`
 
 ### Payment Service
-?
+À compléter.
 
 ---
 
-## Développement avec Bun
+## 🛠️ Développement avec Bun
 
 ### Installer les dépendances
 
@@ -213,12 +233,12 @@ bun run src/server.ts
 
 ---
 
-## Contributions
+## 🤝 Contributions
 
 **RIBEIRO Thomas / RAOUT Enguéran / BONAL Alexis**
 
 ---
 
-## Licence
+## 📄 Licence
 
 Ce projet est sous licence MIT. Consultez le fichier `LICENSE` pour plus de détails.
