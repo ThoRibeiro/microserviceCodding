@@ -52,7 +52,19 @@ services:
       - mongo
 
   # Payment Service
-  
+  payment-service:
+    build:
+      context: ./services/payment-service
+    ports:
+      - "3004:3004"
+    environment:
+      - MONGO_URI=${MONGO_URI}/product-service
+      - USER_SERVICE_URL=${USER_SERVICE}
+      - ORDER_SERVICE_URL=${ORDER_SERVICE}
+      - PRODUCT_SERVICE_URL=${PRODUCT_SERVICE}
+    depends_on:
+      - mongo
+      
   # MongoDB
   mongo:
     image: mongo
