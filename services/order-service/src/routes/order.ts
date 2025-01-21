@@ -2,21 +2,21 @@ import { Router } from "express";
 import { OrderController } from "../controllers/orderController";
 
 
-const router = Router();
+const orderRoutes = Router();
 
 // Récupérer toutes les commandes
-router.get("/", OrderController.getOrders);
+orderRoutes.get("/", OrderController.getOrders);
 
 // Récupérer une commande par ID
-router.get("/:id", OrderController.getOrderById);
+orderRoutes.get("/:id", OrderController.getOrderById);
 
 // Créer une nouvelle commande
-router.post("/", OrderController.createOrder);
+orderRoutes.post("/", OrderController.createOrder);
 
 // Modifier une commande
-router.put("/:id", OrderController.updateOrder);
+orderRoutes.put("/:id", OrderController.updateOrder);
 
 // Supprimer une commande
-router.delete("/:id", OrderController.deleteOrder);
+orderRoutes.delete("/:id", OrderController.deleteOrder);
 
-export default router;
+export default orderRoutes;

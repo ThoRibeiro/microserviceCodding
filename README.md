@@ -1,6 +1,7 @@
 # Microservices API démo mémoire
 
-Bienvenue dans ce projet qui démontre le développement et la mise en œuvre d'une API basée sur une architecture de microservices. Ce projet utilise **Bun** comme gestionnaire de packages et comprend plusieurs services découplés (Gateway, User Service, et Order Service).
+Bienvenue dans ce projet qui démontre le développement et la mise en œuvre d'une API basée sur une architecture de microservices. 
+Ce projet utilise **Bun** comme gestionnaire de packages et comprend plusieurs services découplés (Gateway, User Service, et Order Service).
 
 ---
 
@@ -25,6 +26,7 @@ Ce projet est conçu pour illustrer les concepts fondamentaux des microservices 
 - **Gateway** : Point d'entrée pour orchestrer les appels vers les services internes.
 - **User Service** : Service dédié à la gestion des utilisateurs (CRUD).
 - **Order Service** : Service dédié à la gestion des commandes (CRUD).
+- **Product Service** : Service dédié à la gestion des produits (CRUD).
 
 Chaque service est autonome et communique via des appels HTTP.
 
