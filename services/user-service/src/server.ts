@@ -16,7 +16,7 @@ app.use("/users", userRoutes);
 
 // Connexion à MongoDB
 mongoose
-  .connect(process.env.MONGO || "mongodb://mongodb:27017/user-service", {
+  .connect(process.env.MONGO_URI || "mongodb://mongodb:27017/user-service", {
   } as mongoose.ConnectOptions)
   .then(() => {
     console.log("Connected to MongoDB");
