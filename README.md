@@ -1,7 +1,8 @@
 # Microservices API démo mémoire
 
 Bienvenue dans ce projet qui démontre le développement et la mise en œuvre d'une API basée sur une architecture de microservices. 
-Ce projet utilise **Bun** comme gestionnaire de packages et comprend plusieurs services découplés (Gateway, User Service, et Order Service).
+
+Ce projet utilise **Bun** comme gestionnaire de packages et comprend plusieurs services découplés (Gateway, User Service, Order Service, Product Service & Payment Service à venir).
 
 ---
 
@@ -27,6 +28,7 @@ Ce projet est conçu pour illustrer les concepts fondamentaux des microservices 
 - **User Service** : Service dédié à la gestion des utilisateurs (CRUD).
 - **Order Service** : Service dédié à la gestion des commandes (CRUD).
 - **Product Service** : Service dédié à la gestion des produits (CRUD).
+- **Payment Service** : Service dédié à la gestion des payements (CRUD | Pour évaluation). 
 
 Chaque service est autonome et communique via des appels HTTP.
 
@@ -129,6 +131,11 @@ MONGO_URI=mongodb://mongo:27017/order-service
 PORT=3002
 ```
 
+**`services/payment-service/.env`**
+```
+MONGO_URI=? 
+PORT=?
+```
 ---
 
 ## Démarrage du projet
@@ -180,6 +187,9 @@ http://localhost:3000/
 - **POST** `/products`
 - **PUT** `/products/:id`
 - **DELETE** `/products/:id`
+
+### Payment Service
+?
 
 ---
 

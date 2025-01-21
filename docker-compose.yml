@@ -51,6 +51,9 @@ services:
     depends_on:
       - mongo
 
+  # Payment Service
+  
+
   # MongoDB
   mongo:
     image: mongo
