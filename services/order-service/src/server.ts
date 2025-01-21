@@ -9,10 +9,6 @@ dotenv.config();
 
 const app = express();
 
-// Middlewares globaux
-app.use(cors());
-app.use(bodyParser.json());
-
 // Routes principales
 app.use("/orders", orderRoutes);
 
