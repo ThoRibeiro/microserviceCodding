@@ -26,4 +26,22 @@ export class UserService {
   static async deleteUser(id: string): Promise<IUser | null> {
     return await User.findByIdAndDelete(id);
   }
+
+  // Incrémenter "totalPayments"
+  static async incrementTotalPayments(userId: string, amount: number): Promise<IUser | null> {
+    return await User.findByIdAndUpdate(
+      userId,
+      { $inc: { totalPayments: amount } },
+      { new: true }
+    );
+  }
+
+  // Décrémenter "totalPayments"
+  static async decrementTotalPayments(userId: string, amount: number): Promise<IUser | null> {
+    return await User.findByIdAndUpdate(
+      userId,
+      { $inc: { totalPayments: -amount } },
+      { new: true }
+    );
+  }
 }

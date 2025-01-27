@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { UserService } from "../services/userService";
+import User from "../models/user";
 
 
 export class UserController {
@@ -75,6 +76,54 @@ export class UserController {
       res.status(200).json({ status: 200, message: "User deleted" });
     } catch (error) {
       res.status(500).json({ status: 500, message: "Error deleting user", error });
+    }
+  }
+
+  // Incremente le champ "totalAmount"
+  static async incrementTotalPayments(req: Request, res: Response): Promise<any> {
+    try {
+      const { id } = req.params;
+      const { amount } = req.body;
+
+      if (!amount) {
+        res.status(400).json({ message: "Amount is required" });
+        return;
+      }
+
+      const updatedUser = await UserService.incrementTotalPayments(id, amount);
+
+      if (!updatedUser) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
+      res.status(200).json({ message: "Total payments incremented successfully", user: updatedUser });
+    } catch (error) {
+      res.status(500).json({ message: "Error incrementing total payments", error });
+    }
+  }
+
+  // Decremente le champ "totalAmount"
+  static async decrementTotalPayments(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const { amount } = req.body;
+
+      if (!amount) {
+        res.status(400).json({ message: "Amount is required" });
+        return;
+      }
+
+      const updatedUser = await UserService.decrementTotalPayments(id, amount);
+
+      if (!updatedUser) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
+      res.status(200).json({ message: "Total payments decremented successfully", user: updatedUser });
+    } catch (error) {
+      res.status(500).json({ message: "Error decrementing total payments", error });
     }
   }
 }

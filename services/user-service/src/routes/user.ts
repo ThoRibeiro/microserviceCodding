@@ -8,5 +8,7 @@ userRoutes.get("/:id", UserController.getUserById);
 userRoutes.post("/", UserController.createUser);
 userRoutes.put("/:id", UserController.updateUser);
 userRoutes.delete("/:id", UserController.deleteUser);
+userRoutes.put("/:id/increment-payments", UserController.incrementTotalPayments);
+userRoutes.put("/:id/decrement-payments", UserController.decrementTotalPayments);
 
 export default userRoutes;
