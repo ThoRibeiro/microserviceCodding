@@ -22,7 +22,7 @@ mongoose
     console.log("Connected to MongoDB");
 
     // Lancement du serveur
-    const PORT = process.env.PORT || 3002;
+    const PORT = process.env.PORT_ORDER || 3002;
     app.listen(PORT, () => {
       console.log(`Product Service running on port ${PORT}`);
     });
