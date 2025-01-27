@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IPayment extends Document {
   orderId: string;
+  userId: string;
   amount: number;
   status: string;
   createdAt: Date;
@@ -9,6 +10,7 @@ export interface IPayment extends Document {
 
 const PaymentSchema: Schema = new Schema({
   orderId: { type: String, required: true },
+  userId: { type: String, required : true },
   amount: { type: Number, required: true },
   status: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
   createdAt: { type: Date, default: Date.now },

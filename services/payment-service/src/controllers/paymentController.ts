@@ -36,10 +36,27 @@ export class PaymentController {
     try {
       const data = req.body
 
-      if (!data.orderId || !data.amount) {
+      if (!data.orderId || !data.amount || !data.userId) {
         res.status(400).json({ status: 400, message: "Order ID and amount are required" });
         return;
       }
+
+      // Validation pour savoir si la commande existe via Order Service
+      const orderServiceUrl = `http://order-service:3002/orders/${data.orderId}`;
+      const response = await fetch(orderServiceUrl);
+
+      if (!response.ok) {
+        res.status(404).json({ message: "Order not found" });
+        return;
+      }
+
+      // Appel du User Service pour incrémenter totalPayments
+      const userServiceUrl = `http://user-service:3001/users/${data.userId}/increment-payments`;
+      await fetch(userServiceUrl, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: data.amount }),
+      });
 
       // Création du paiement
       const payment = await PaymentService.createPayment(data);
