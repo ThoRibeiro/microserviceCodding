@@ -28,7 +28,7 @@ Ce projet est conçu pour illustrer les concepts fondamentaux des microservices 
 - **User Service** : Service dédié à la gestion des utilisateurs (CRUD).
 - **Order Service** : Service dédié à la gestion des commandes (CRUD).
 - **Product Service** : Service dédié à la gestion des produits (CRUD).
-- **Payment Service** : Service dédié à la gestion des payements (CRUD | Pour évaluation). 
+- **Payment Service** : Service dédié à la gestion des paiements (CRUD | Pour évaluation). 
 
 Chaque service est autonome et communique via des appels HTTP.
 
@@ -156,6 +156,8 @@ PRODUCT_SERVICE_URL=http://product-service:3003
 MONGO_URI=mongodb://mongo:27017
 ```
 
+Vous pouvez si vous le souhaitez avoir un `.env` global au projet. 😎
+
 ---
 
 ## ▶️ Démarrage du projet
@@ -165,7 +167,7 @@ MONGO_URI=mongodb://mongo:27017
 1. Construisez et démarrez les conteneurs :
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 2. Vérifiez que tous les services sont en cours d'exécution :

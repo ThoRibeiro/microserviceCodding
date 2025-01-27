@@ -36,6 +36,11 @@ Votre mission est de migrer une API monolithique de paiement vers un **Payment S
 
 Le **Payment Service** devra communiquer avec l’**Order Service** pour valider que la commande existe avant de créer un paiement.
 
+💡 **Nouvelle demande du client :**
+Le client souhaite pouvoir consulter le total dépensé par chaque utilisateur. Vous devez donc :
+- Implémenter une fonctionnalité pour **incrémenter** le montant total des paiements d’un utilisateur lorsque celui-ci effectue un paiement.
+- **Décrémenter** ce montant lorsqu’un paiement est annulé.
+
 🛑 Pour commencer, vous devez forker le dépôt existant et le renommer sous la forme `evalFinale-NOM-Prénom`.
 
 ---
@@ -52,6 +57,7 @@ Le **Payment Service** doit inclure les routes suivantes :
     ```json
     {
       "orderId": "id_de_la_commande",
+      "userId":"6e36752Z657865XT324",
       "amount": 100.50,
       "status": "pending"
     }
@@ -78,10 +84,13 @@ Le **Payment Service** doit inclure les routes suivantes :
 1. Utilisez **TypeScript** et **Express** pour le développement.
 2. Utilisez **MongoDB** pour stocker les paiements.
 3. Intégrez l’**Order Service** pour valider les commandes via une requête HTTP.
-4. Fournissez un fichier **Dockerfile** pour conteneuriser votre microservice.
-5. Ajoutez la configuration nécessaire dans le fichier **docker-compose.yml** existant pour intégrer votre microservice.
-6. Créez une documentation **Postman** (ou similaire) décrivant toutes vos requêtes pour tester l’API.
+4. Implémentez la gestion du total dépensé par les utilisateurs dans le **User Service** :
+   - Créez une méthode pour **incrémenter** et **décrémenter** le champ `totalPayments`.
+5. Fournissez un fichier **Dockerfile** pour conteneuriser votre microservice.
+6. Ajoutez la configuration nécessaire dans le fichier **docker-compose.yml** existant pour intégrer votre microservice.
+7. Créez une documentation **Postman** (ou similaire) décrivant toutes vos requêtes pour tester l’API.
 
+---
 
 ## **🕰️ Modifications à effectuer dans les services existants :**
 
@@ -89,32 +98,49 @@ Le **Payment Service** doit inclure les routes suivantes :
 1. **Ajout d’un champ `totalPayments` dans le modèle utilisateur :**
    - Ce champ doit suivre le montant total des paiements effectués par chaque utilisateur.
 2. **Mise à jour automatique de `totalPayments` :**
-   - Incrémentez le montant lors de la création d’un paiement.
-   - Diminuez le montant lors de la suppression d’un paiement.
+   - **Incrémentez** le montant lors de la création d’un paiement.
+   - **Diminuez** le montant lors de la suppression d’un paiement.
+
+Ajoutez deux routes dans le **User Service** :
+- **PUT /users/:id/increment-payments** :
+  - Incrémente le champ `totalPayments` d’un utilisateur.
+  - Corps attendu :
+    ```json
+    {
+      "amount": 100.50
+    }
+    ```
+- **PUT /users/:id/decrement-payments** :
+  - Diminue le champ `totalPayments` d’un utilisateur.
+  - Corps attendu :
+    ```json
+    {
+      "amount": 100.50
+    }
+    ```
 
 ### **Order Service :**
 1. **Validation avant la confirmation de commande :**
    - Ajoutez une validation pour vérifier qu’un paiement valide existe avant de confirmer une commande.
-2. **Ajout d’un champ `paymentStatus` dans le modèle commande :**
-   - Indique si le paiement est « en attente », « réussi » ou « échoué ».
 
 ---
 
 ## **📊 Évaluation et barème (sur 20 points) :**
 
-1. **Fonctionnalités de base (8 points) :**
+1. **Fonctionnalités de base (15 points) :**
    - Implémentation des routes CRUD (POST, GET, PUT, DELETE).
    - Validation avec l’Order Service avant la création d’un paiement.
+   - Intégration dans le User Service.
 
-2. **Architecture et organisation du code (4 points) :**
+2. **Architecture et organisation du code (2 points) :**
    - Utilisation des bonnes pratiques (MVC).
    - Code lisible et bien organisé.
 
-3. **Intégration et communication (4 points) :**
+3. **Intégration et communication (1 point) :**
    - Intégration réussie avec l’Order Service via des requêtes HTTP.
    - Ajout correct dans le `docker-compose.yml`.
 
-4. **Documentation et tests (4 points) :**
+4. **Documentation et tests (2 points) :**
    - Documentation complète (README, Postman ou équivalent).
    - Exemple de requêtes cURL ou Postman pour tester l’API.
 
