@@ -1,7 +1,7 @@
 services:
   # API Gateway
   gateway:
-    build: 
+    build:
       context: ./gateway
     ports:
       - "3000:3000"
@@ -58,13 +58,15 @@ services:
     ports:
       - "3004:3004"
     environment:
-      - MONGO_URI=${MONGO_URI}/product-service
+      - MONGO_URI=${MONGO_URI}/payment-service
       - USER_SERVICE_URL=${USER_SERVICE}
       - ORDER_SERVICE_URL=${ORDER_SERVICE}
       - PRODUCT_SERVICE_URL=${PRODUCT_SERVICE}
     depends_on:
       - mongo
-      
+      - user-service
+      - order-service
+      - product-service
   # MongoDB
   mongo:
     image: mongo

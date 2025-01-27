@@ -1,8 +1,10 @@
 import type { Request, Response } from "express";
 import { PaymentService } from "../services/paymentService";
+import axios from "axios";
 
 export class PaymentController {
-  // Récupérer tous les paiements
+
+  // Récupération de tous les paiements
   static async getPayments(req: Request, res: Response): Promise<void> {
     try {
       const payments = await PaymentService.getAllPayments();
@@ -12,7 +14,7 @@ export class PaymentController {
     }
   }
 
-  // Récupérer un paiement par ID
+  // Récupération d'un paiement par ID
   static async getPaymentById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -29,24 +31,30 @@ export class PaymentController {
     }
   }
 
-  // Créer un nouveau paiement
+  // Création d'un nouveau paiement
   static async createPayment(req: Request, res: Response): Promise<void> {
     try {
-      const { orderId, amount, status } = req.body;
+      const data = req.body
 
-      if (!orderId || !amount) {
+      if (!data.orderId || !data.amount) {
         res.status(400).json({ status: 400, message: "Order ID and amount are required" });
         return;
       }
 
-      const payment = await PaymentService.createPayment({ orderId, amount, status });
-      res.status(201).json({ status: 201, message: "Payment created", data: payment });
+      // Création du paiement
+      const payment = await PaymentService.createPayment(data);
+
+      res.status(201).json({ status: 201, message: "Payment created successfully", data: payment });
     } catch (error) {
-      res.status(500).json({ status: 500, message: "Error creating payment", error });
+      res.status(500).json({
+        status: 500,
+        message: `Error creating payment`,
+        error: (error as Error).message,
+      });
     }
   }
 
-  // Mettre à jour un paiement
+  // Mis à jour du paiement
   static async updatePayment(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -69,15 +77,22 @@ export class PaymentController {
     try {
       const { id } = req.params;
 
-      const deletedPayment = await PaymentService.deletePayment(id);
-      if (!deletedPayment) {
+      const payment = await PaymentService.getPaymentById(id);
+      if (!payment) {
         res.status(404).json({ status: 404, message: "Payment not found" });
         return;
       }
 
-      res.status(200).json({ status: 200, message: "Payment deleted" });
+      // Suppréssion du paiement
+      await PaymentService.deletePayment(id);
+
+      res.status(200).json({ status: 200, message: "Payment deleted successfully" });
     } catch (error) {
-      res.status(500).json({ status: 500, message: "Error deleting payment", error });
+      res.status(500).json({
+        status: 500,
+        message: "Error deleting payment",
+        error: (error as Error).message,
+      });
     }
   }
 }
